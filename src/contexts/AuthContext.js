@@ -14,39 +14,79 @@ export function AuthProvider({ children }) {
 	const [loading, setLoading] = useState(true);
 
 	function signup(email, password) {
-		return auth.createUserWithEmailAndPassword(email, password);
+		return auth
+			.createUserWithEmailAndPassword(email, password)
+			.then(() => {})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	function login(email, password) {
-		return auth.signInWithEmailAndPassword(email, password);
+		return auth
+			.signInWithEmailAndPassword(email, password)
+			.then(() => {})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	function logout() {
-		return auth.signOut();
+		return auth
+			.signOut()
+			.then(() => {})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	function resetPassword(email) {
-		return auth.sendPasswordResetEmail(email);
+		return auth
+			.sendPasswordResetEmail(email)
+			.then(() => {})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	function updateEmail(email) {
-		return currentUser.updateEmail(email);
+		return currentUser
+			.updateEmail(email)
+			.then(() => {})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	function updateProfileDisplayName(displayName) {
-		return currentUser.updateProfile({
-			displayName: displayName,
-		});
+		return currentUser
+			.updateProfile({
+				displayName: displayName,
+			})
+			.then(() => {})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	function updateProfilePhotoURL(photoURL) {
-		return currentUser.updateProfile({
-			photoURL: photoURL,
-		});
+		return currentUser
+			.updateProfile({
+				photoURL: photoURL,
+			})
+			.then(() => {})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	function updatePassword(password) {
-		return currentUser.updatePassword(password);
+		return currentUser
+			.updatePassword(password)
+			.then(() => {})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
 
 	useEffect(() => {

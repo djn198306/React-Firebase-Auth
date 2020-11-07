@@ -28,6 +28,7 @@ export default function UpdateProfile() {
 
 	const { currentUser, updateEmail, updateProfileDisplayName } = useAuth();
 
+	const [image, setImage] = useState(null);
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
@@ -63,6 +64,12 @@ export default function UpdateProfile() {
 			});
 	}
 
+	function handleChange(e) {
+		if (e.target.files[0]) {
+			setImage(e.target.files[0]);
+		}
+	}
+
 	/* Component View */
 	return (
 		<>
@@ -74,8 +81,13 @@ export default function UpdateProfile() {
 					<Form onSubmit={handleSubmit}>
 						<Form.Group id='photo' className='picture-container'>
 							<div className='picture'>
-								<Image src={defaultImage} className='picture-src' />
-								<Form.File ref={photoRef} />
+								<Image
+									src={
+										currentUser.photoURL ? currentUser.photoURL : defaultImage
+									}
+									className='picture-src'
+								/>
+								<Form.File ref={photoRef} onChange={handleChange} />
 							</div>
 							<Form.Label>Choose Picture</Form.Label>
 						</Form.Group>

@@ -38,7 +38,11 @@ export default function Dashboard() {
 					<h2 className='text-center mb-4'>Profile</h2>
 					{error && <Alert variant='danger'>{error}</Alert>}
 
-					<Image className='' src={defaultImage} roundedCircle />
+					<Image
+						className='mx-auto d-block'
+						src={currentUser.photoURL ? currentUser.photoURL : defaultImage}
+						roundedCircle
+					/>
 
 					<p>
 						<strong>Email: </strong>
@@ -54,7 +58,7 @@ export default function Dashboard() {
 					</p>
 
 					<Link to='/update-profile' className='btn btn-primary w-100 mt-3'>
-						Update Profile
+						Edit Profile
 					</Link>
 				</Card.Body>
 			</Card>
