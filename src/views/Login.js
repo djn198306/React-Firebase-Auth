@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 
 // project/core context
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 
 export default function Login() {
 	/* Component State */

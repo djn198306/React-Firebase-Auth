@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Card, Button, Alert, Image } from 'react-bootstrap';
 
 // project/core context
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 
 // project/core assets
 import defaultImage from 'assets/img/default-avatar.png';

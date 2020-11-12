@@ -16,7 +16,7 @@ import UpdateProfile from 'views//UpdateProfile';
 import UpdatePassword from 'views//UpdatePassword';
 
 // project/core context
-import { AuthProvider } from '../contexts/AuthContext';
+import { AuthProvider } from 'contexts/AuthContext';
 
 export default function App() {
 	/* Component State */
