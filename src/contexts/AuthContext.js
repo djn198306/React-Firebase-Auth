@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 // project/core utils
 import { auth } from 'utils/firebase/firebase';
@@ -11,8 +10,6 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-	const history = useHistory();
-
 	const [currentUser, setCurrentUser] = useState();
 	const [error, setError] = useState(true);
 	const [loading, setLoading] = useState(true);
@@ -118,10 +115,6 @@ export function AuthProvider({ children }) {
 
 		return subscriber;
 	}, []);
-
-	useEffect(() => {
-		setError('');
-	}, [history]);
 
 	const value = {
 		currentUser,
