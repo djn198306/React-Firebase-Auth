@@ -26,10 +26,15 @@ export default function UpdateProfile() {
 	const lastNameRef = useRef();
 	const photoRef = useRef();
 
-	const { currentUser, updateEmail, updateProfileDisplayName } = useAuth();
+	const {
+		currentUser,
+		updateEmail,
+		updateProfileDisplayName,
+		error,
+		setError,
+	} = useAuth();
 
 	const [image, setImage] = useState(null);
-	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	/* Component Actions */
@@ -38,7 +43,6 @@ export default function UpdateProfile() {
 
 		const promises = [];
 		setLoading(true);
-		setError('');
 
 		if (emailRef.current.value !== currentUser.email) {
 			promises.push(updateEmail(emailRef.current.value));
@@ -54,14 +58,13 @@ export default function UpdateProfile() {
 
 		Promise.all(promises)
 			.then(() => {
-				history.push('/');
+				return history.push('/');
 			})
 			.catch(() => {
 				setError('Failed to update account');
-			})
-			.finally(() => {
-				setLoading(false);
 			});
+
+		setLoading(false);
 	}
 
 	function handleChange(e) {

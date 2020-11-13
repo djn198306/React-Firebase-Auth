@@ -13,21 +13,20 @@ export default function UpdateProfile() {
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
 
-	const { updatePassword } = useAuth();
+	const { updatePassword, error, setError } = useAuth();
 
-	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	/* Component Actions */
 	function handleSubmit(e) {
 		e.preventDefault();
+
 		if (passwordRef.current.value !== passwordConfirmRef.current.value) {
 			return setError('Passwords do not match');
 		}
 
 		const promises = [];
 		setLoading(true);
-		setError('');
 
 		if (passwordRef.current.value) {
 			promises.push(updatePassword(passwordRef.current.value));
@@ -35,14 +34,13 @@ export default function UpdateProfile() {
 
 		Promise.all(promises)
 			.then(() => {
-				history.push('/');
+				return history.push('/');
 			})
 			.catch(() => {
 				setError('Failed to update password');
-			})
-			.finally(() => {
-				setLoading(false);
 			});
+
+		setLoading(false);
 	}
 
 	/* Component View */

@@ -14,20 +14,23 @@ export default function Dashboard() {
 	/* Component State */
 	const history = useHistory();
 
-	const { currentUser, logout } = useAuth();
+	const { currentUser, logout, error, setError } = useAuth();
 
-	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(false);
 
 	/* Component Actions */
-	async function handleLogout() {
-		setError('');
+	async function handleLogout(e) {
+		e.preventDefault();
+		setLoading(true);
 
 		try {
 			await logout();
-			history.push('/login');
+			return history.push('/login');
 		} catch {
 			setError('Failed to log out');
 		}
+
+		setLoading(false);
 	}
 
 	/* Component View */
@@ -63,7 +66,7 @@ export default function Dashboard() {
 				</Card.Body>
 			</Card>
 			<div className='w-100 text-center mt-2'>
-				<Button variant='link' onClick={handleLogout}>
+				<Button disabled={loading} variant='link' onClick={handleLogout}>
 					Log Out
 				</Button>
 			</div>

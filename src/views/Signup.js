@@ -14,9 +14,8 @@ export default function Signup() {
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
 
-	const { signup } = useAuth();
+	const { signup, error, setError } = useAuth();
 
-	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	/* Component Actions */
@@ -27,11 +26,11 @@ export default function Signup() {
 			return setError('Passwords do not match');
 		}
 
+		setLoading(true);
+
 		try {
-			setError('');
-			setLoading(true);
 			await signup(emailRef.current.value, passwordRef.current.value);
-			history.push('/');
+			return history.push('/');
 		} catch {
 			setError('Failed to create an account');
 		}

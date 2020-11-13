@@ -13,20 +13,20 @@ export default function Login() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 
-	const { login } = useAuth();
+	const { login, error, setError } = useAuth();
 
-	const [error, setError] = useState('');
+	// const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	/* Component Actions */
+
 	async function handleSubmit(e) {
 		e.preventDefault();
+		setLoading(true);
 
 		try {
-			setError('');
-			setLoading(true);
 			await login(emailRef.current.value, passwordRef.current.value);
-			history.push('/');
+			return history.push('/');
 		} catch {
 			setError('Failed to log in');
 		}

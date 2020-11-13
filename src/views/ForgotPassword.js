@@ -11,20 +11,18 @@ export default function ForgotPassword() {
 	/* Component State */
 	const emailRef = useRef();
 
-	const { resetPassword } = useAuth();
+	const { resetPassword, error, setError } = useAuth();
 
 	const [message, setMessage] = useState('');
-	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	/* Component Actions */
 	async function handleSubmit(e) {
 		e.preventDefault();
+		setMessage('');
+		setLoading(true);
 
 		try {
-			setMessage('');
-			setError('');
-			setLoading(true);
 			await resetPassword(emailRef.current.value);
 			setMessage('Check your inbox for further instructions');
 		} catch {
